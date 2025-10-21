@@ -4,7 +4,9 @@ A basic TCP honeypot written in Python to simulate a listening service, detect u
 
 ##  Overview
 
-This honeypot is designed to act as a dummy server that listens on a specified port (default: `9999`). It accepts incoming connections, logs any data received, and then closes the connection. This can be useful for detecting scanning behavior, logging unauthorized access attempts, or conducting security research in a controlled environment.
+- This honeypot is designed to act as a dummy server that listens on a specified port (default: `9999`).
+- It accepts incoming connections, logs any data received, and then closes the connection.
+- This can be useful for detecting scanning behavior, logging unauthorized access attempts, or conducting security research in a controlled environment.
 
  **Warning:** This honeypot is not a production-level security solution. It should be run in isolated environments or for educational purposes only.
 
@@ -33,12 +35,18 @@ This honeypot is designed to act as a dummy server that listens on a specified p
 ## Installation
 
 1. Clone the repository:
-   git clone https://github.com/yourusername/python-honeypot.git
-   cd python-honeypot
+
+         git clone https://github.com/yourusername/python-honeypot.git
+
+         cd python-honeypot
+  
 3. Run the script:
-   python honeypot.py
+   
+         python honeypot.py
+
 You should see:
-   Honeypot listening on port 9999....
+
+      Honeypot listening on port 9999....
 
 ##  Example Output 
 
@@ -59,17 +67,24 @@ And in honeypot_log.txt :
 
 # How It Works
 
-The script creates a TCP socket and binds it to all available interfaces on port 9999.
-
-It waits for incoming connections using listen().
-
-Once a client connects, it accepts the connection and receives up to 1024 bytes of data.
-
-The data is decoded (ignoring errors) and logged using Python’s logging module.
-
-After handling each client, the connection is closed.
+- The script creates a TCP socket and binds it to all available interfaces on port 9999.
+- It waits for incoming connections using listen().
+- Once a client connects, it accepts the connection and receives up to 1024 bytes of data.
+- The data is decoded (ignoring errors) and logged using Python’s logging module.
+- After handling each client, the connection is closed.
 
 # Configuration
 To change the listening port, edit the line:
 
-    honeypot_socket.bind(('0.0.0.0', 9999)) # Change 9999 to your desired port number.
+       honeypot_socket.bind(('0.0.0.0', 9999)) # Change 9999 to your desired port number.
+
+# Security Notes
+- This honeypot does not respond to clients beyond accepting connections and receiving data.
+- It should be deployed in a controlled or monitored environment (e.g., a sandbox or lab).
+- Do not expose it to the public internet unless you know what you’re doing.
+
+# Future Improvements
+- Add geolocation lookup for incoming IPs
+- Support for multiple ports or protocols (e.g., UDP)
+- Integration with log analysis tools (e.g., ELK stack)
+- Log rotation support
